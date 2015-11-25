@@ -1,26 +1,29 @@
-# Ember-cli-deploy-alioss
+# ember-cli-deploy-alioss
 
-This README outlines the details of collaborating on this Ember addon.
+> An ember-cli-deploy [plugin][1] to upload files to Aliyun OSS （阿里云对象储存）.
 
-## Installation
+## Quick Start
 
-* `git clone` this repository
-* `npm install`
-* `bower install`
+To get up and running quickly, do the following:
 
-## Running
+- Ensure [ember-cli-deploy-build][2] is installed and configured.
 
-* `ember server`
-* Visit your app at http://localhost:4200.
+- Install this plugin
 
-## Running Tests
+```bash
+$ ember install ember-cli-deploy-alioss
+```
 
-* `npm test` (Runs `ember try:testall` to test your addon against multiple Ember versions)
-* `ember test`
-* `ember test --server`
+- Place the following configuration into `config/deploy.js`
 
-## Building
+```javascript
+ENV.alioss = {
+  accessKeyId: '<your-oss-access-key>',
+  secretAccessKey: '<your-oss-secret>',
+  bucket: '<your-oss-bucket>'
+}
+```
+[1]: http://ember-cli.github.io/ember-cli-deploy/plugins "Plugin Documentation"
+[2]: https://github.com/ember-cli-deploy/ember-cli-deploy-build "ember-cli-deploy-build"
 
-* `ember build`
-
-For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
+## Still WIP
