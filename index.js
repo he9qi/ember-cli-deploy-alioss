@@ -27,6 +27,12 @@ module.exports = {
         },
         manifestPath: function(context) {
           return context.manifestPath; // e.g. from ember-cli-deploy-manifest
+        },
+        uploadClient: function(context) {
+          return context.uploadClient; // if you want to provide your own upload client to be used instead of one from this addon
+        },
+        aliossClient: function(context) {
+          return context.aliossClient; // if you want to provide your own Aliyun OSS client to be used instead of one from aliyun-sdk
         }
       },
       requiredConfig: ['accessKeyId', 'secretAccessKey', 'bucket', 'region'],
@@ -44,7 +50,7 @@ module.exports = {
 
          var filesToUpload = distFiles.filter(minimatch.filter(filePattern, { matchBase: true }));
 
-         var alisso = new Alioss({
+         var alioss = this.readConfig('uploadClient') || new Alioss({
            plugin: this
          });
 
@@ -58,9 +64,9 @@ module.exports = {
            manifestPath: manifestPath
          };
 
-         this.log('preparing to upload to Aliyun OSS bucket `' + bucket + '`', { verbose: true });
+         this.log('preparing to upload to alioss bucket `' + bucket + '`', { verbose: true });
 
-         return alisso.upload(options)
+         return alioss.upload(options)
          .then(function(filesUploaded){
            self.log('uploaded ' + filesUploaded.length + ' files ok', { verbose: true });
            return { filesUploaded: filesUploaded };

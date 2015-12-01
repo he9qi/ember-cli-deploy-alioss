@@ -1,6 +1,10 @@
 # ember-cli-deploy-alioss
 
-> An ember-cli-deploy [plugin][1] to upload files to Aliyun OSS （阿里云对象储存）.
+> An ember-cli-deploy [plugin][1] to upload files to Aliyun OSS （阿里云对象储存）.  
+
+![](https://camo.githubusercontent.com/d65a04992412d3a15584f0d302a69df2749176c7/68747470733a2f2f656d6265722d636c692d6465706c6f792e6769746875622e696f2f656d6265722d636c692d6465706c6f792d76657273696f6e2d6261646765732f706c7567696e732f656d6265722d636c692d6465706c6f792d73332e737667)
+
+This plugin is originally a fork from [ember-cli-deploy-s3][5] to setup Aliyun OSS.
 
 ## Quick Start
 
@@ -129,3 +133,4 @@ The following properties are expected to be present on the deployment `context` 
 [2]: https://github.com/ember-cli-deploy/ember-cli-deploy-build "ember-cli-deploy-build"
 [3]: https://github.com/lukemelia/ember-cli-deploy-gzip "ember-cli-deploy-gzip"
 [4]: https://github.com/lukemelia/ember-cli-deploy-manifest "ember-cli-deploy-manifest"
+[5]: https://github.com/ember-cli-deploy/ember-cli-deploy-s3 "ember-cli-deploy-s3"
