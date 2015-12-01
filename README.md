@@ -49,25 +49,25 @@ For detailed information on how configuration of plugins works, please refer to 
 
 ### accessKeyId (`required`)
 
-The AWS access key for the user that has the ability to upload to the `bucket`.
+The OSS access key for the user that has the ability to upload to the `bucket`.
 
 *Default:* `undefined`
 
 ### secretAccessKey (`required`)
 
-The AWS secret for the user that has the ability to upload to the `bucket`.
+The OSS secret for the user that has the ability to upload to the `bucket`.
 
 *Default:* `undefined`
 
 ### bucket (`required`)
 
-The AWS bucket that the files will be uploaded to.
+The OSS bucket that the files will be uploaded to.
 
 *Default:* `undefined`
 
 ### region (`required`)
 
-The region the AWS `bucket` is located in.
+The region the OSS `bucket` is located in.
 
 *Default:* `undefined`
 
