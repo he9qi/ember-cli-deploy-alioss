@@ -5,7 +5,13 @@
 [![Build Status](https://travis-ci.org/he9qi/ember-cli-deploy-alioss.svg?branch=master)](https://travis-ci.org/he9qi/ember-cli-deploy-alioss)
 ![](https://camo.githubusercontent.com/d65a04992412d3a15584f0d302a69df2749176c7/68747470733a2f2f656d6265722d636c692d6465706c6f792e6769746875622e696f2f656d6265722d636c692d6465706c6f792d76657273696f6e2d6261646765732f706c7567696e732f656d6265722d636c692d6465706c6f792d73332e737667)
 
-This plugin is originally a fork from [ember-cli-deploy-s3][5] to setup Aliyun OSS.
+This plugin is originally a fork from [ember-cli-deploy-s3][5] to setup [阿里云对象存储 Aliyun OSS](http://oss.aliyun.com/).
+
+## Aliyun OSS Policy Requirements
+
+Make sure to enable your bucket's ACL to public read.
+
+<img src="https://cloud.githubusercontent.com/assets/5576425/10038074/0b65078a-6174-11e5-90c6-dbe878c45a9d.jpg" width="640">
 
 ## Quick Start
 
