@@ -29,7 +29,7 @@ module.exports = {
           return context.manifestPath; // e.g. from ember-cli-deploy-manifest
         }
       },
-      requiredConfig: ['accessKeyId', 'secretAccessKey', 'bucket'],
+      requiredConfig: ['accessKeyId', 'secretAccessKey', 'bucket', 'region'],
 
       upload: function(context) {
          var self          = this;
