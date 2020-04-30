@@ -291,18 +291,18 @@ describe('alioss plugin', function() {
       var assertionCount = 0;
       context.uploadClient = null;
       context.aliossClient = {
-        putObject: function(params, cb) {
-          if (params.Key === 'app.css') {
-            assert.equal(params.ContentEncoding, 'gzip');
+        put: function(key, data, params) {
+          if (key === 'app.css') {
+            assert.equal(params.headers['Content-Encoding'], 'gzip');
             assertionCount++;
           } else {
-            assert.isUndefined(params.ContentEncoding);
+            assert.isUndefined(params.headers['Content-Encoding']);
             assertionCount++;
           }
-          cb();
+          return Promise.resolve();
         },
-        getObject: function(params, cb){
-          cb(new Error("File not found"));
+        get: function(key){
+          return Promise.reject(new Error("File not found"));
         }
       };
 

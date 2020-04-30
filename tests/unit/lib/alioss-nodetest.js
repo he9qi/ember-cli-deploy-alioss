@@ -9,11 +9,11 @@ describe('alioss', function() {
 
   beforeEach(function() {
     aliossClient = {
-      putObject: function(params, cb) {
-        cb();
+      put: function(key, data, params) {
+        return Promise.resolve();
       },
-      getObject: function(params, cb){
-        cb(new Error("File not found"));
+      get: function(key) {
+        return Promise.reject(new Error("File not found"));
       }
     };
     mockUi = {
@@ -67,8 +67,8 @@ describe('alioss', function() {
     });
 
     it('rejects if an upload fails', function() {
-      aliossClient.putObject = function(params, cb) {
-        cb('error uploading');
+      aliossClient.put = function(key) {
+        return Promise.reject('error uploading');
       };
 
       var options = {
@@ -86,10 +86,12 @@ describe('alioss', function() {
 
     describe('sending the object to alioss', function() {
       it('sends the correct params', function() {
-        var aliossParams;
-        aliossClient.putObject = function(params, cb) {
+        var aliossParams, aliossData, aliossKey;
+        aliossClient.put = function(key, data, params, cb) {
+          aliossKey = key;
+          aliossData = data;
           aliossParams = params;
-          cb();
+          return Promise.resolve();
         };
 
         var options = {
@@ -104,13 +106,11 @@ describe('alioss', function() {
 
         return assert.isFulfilled(promises)
           .then(function() {
-            assert.equal(aliossParams.Bucket, 'some-bucket');
-            assert.equal(aliossParams.ACL, 'public-read');
-            assert.equal(aliossParams.Body.toString(), 'body: {}\n');
-            assert.equal(aliossParams.ContentType, 'text/css; charset=utf-8');
-            assert.equal(aliossParams.Key, 'js-app/app.css');
-            assert.equal(aliossParams.CacheControl, 'max-age=63072000, public');
-            assert.deepEqual(aliossParams.Expires, new Date('2030'));
+            assert.equal(aliossKey, 'js-app/app.css');
+            assert.equal(aliossData.toString(), 'body: {}\n');
+            assert.equal(aliossParams.mime, 'text/css; charset=utf-8');
+            assert.equal(aliossParams.headers["Cache-Control"], 'max-age=63072000, public');
+            assert.deepEqual(aliossParams.headers["Expires"], new Date('2030'));
           });
       });
     });
@@ -141,9 +141,9 @@ describe('alioss', function() {
       });
 
       it('only uploads missing files when manifest is present on server', function (done) {
-        aliossClient.getObject = function(params, cb){
-          cb(undefined, {
-            Body: "app.js"
+        aliossClient.get = function(key, data, params){
+          return Promise.resolve({
+            content: "app.js"
           });
         };
 

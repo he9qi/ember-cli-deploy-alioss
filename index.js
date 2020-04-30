@@ -38,47 +38,48 @@ module.exports = {
       requiredConfig: ['accessKeyId', 'secretAccessKey', 'bucket', 'region'],
 
       upload: function(context) {
-         var self          = this;
-         var filePattern   = this.readConfig('filePattern');
-         var distDir       = this.readConfig('distDir');
-         var distFiles     = this.readConfig('distFiles');
-         var gzippedFiles  = this.readConfig('gzippedFiles');
-         var bucket        = this.readConfig('bucket');
-         var acl           = this.readConfig('acl');
-         var prefix        = this.readConfig('prefix');
-         var manifestPath  = this.readConfig('manifestPath');
+        var self          = this;
+        var filePattern   = this.readConfig('filePattern');
+        var distDir       = this.readConfig('distDir');
+        var distFiles     = this.readConfig('distFiles');
+        var gzippedFiles  = this.readConfig('gzippedFiles');
+        var bucket        = this.readConfig('bucket');
+        var acl           = this.readConfig('acl');
+        var prefix        = this.readConfig('prefix');
+        var manifestPath  = this.readConfig('manifestPath');
 
-         var filesToUpload = distFiles.filter(minimatch.filter(filePattern, { matchBase: true }));
+        var filesToUpload = distFiles.filter(minimatch.filter(filePattern, { matchBase: true }));
 
-         var alioss = this.readConfig('uploadClient') || new Alioss({
-           plugin: this
-         });
+        var alioss = this.readConfig('uploadClient') || new Alioss({
+          plugin: this
+        });
 
-         var options = {
-           cwd: distDir,
-           filePaths: filesToUpload,
-           gzippedFilePaths: gzippedFiles,
-           prefix: prefix,
-           bucket: bucket,
-           acl: acl,
-           manifestPath: manifestPath
-         };
+        var options = {
+          cwd: distDir,
+          filePaths: filesToUpload,
+          gzippedFilePaths: gzippedFiles,
+          prefix: prefix,
+          bucket: bucket,
+          acl: acl,
+          manifestPath: manifestPath
+        };
 
-         this.log('preparing to upload to alioss bucket `' + bucket + '`', { verbose: true });
+        this.log('preparing to upload to alioss bucket `' + bucket + '`', { verbose: true });
 
-         return alioss.upload(options)
-         .then(function(filesUploaded){
-           self.log('uploaded ' + filesUploaded.length + ' files ok', { verbose: true });
-           return { filesUploaded: filesUploaded };
-         })
-         .catch(this._errorMessage.bind(this));
-        },
-        _errorMessage: function(error) {
-         this.log(error, { color: 'red' });
-         if (error) {
-           this.log(error.stack, { color: 'red' });
-         }
-         return Promise.reject(error);
+        return alioss.upload(options)
+          .then(function(filesUploaded){
+            self.log('uploaded ' + filesUploaded.length + ' files ok', { verbose: true });
+            return { filesUploaded: filesUploaded };
+          })
+          .catch(this._errorMessage.bind(this));
+      },
+      
+      _errorMessage: function(error) {
+        this.log(error, { color: 'red' });
+        if (error) {
+          this.log(error.stack, { color: 'red' });
+        }
+        return Promise.reject(error);
       }
     });
 
