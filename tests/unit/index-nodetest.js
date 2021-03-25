@@ -1,7 +1,12 @@
 'use strict';
 
-var assert = require('ember-cli/tests/helpers/assert');
-var Promise = require('ember-cli/lib/ext/promise');
+var chai  = require('chai');
+var chaiAsPromised = require("chai-as-promised");
+chai.use(chaiAsPromised);
+
+var assert = chai.assert;
+var RSVP = require('rsvp');
+var Promise = RSVP.Promise;
 
 describe('alioss plugin', function() {
   var subject;

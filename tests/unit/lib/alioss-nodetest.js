@@ -1,4 +1,8 @@
-var assert = require('ember-cli/tests/helpers/assert');
+var chai  = require('chai');
+var chaiAsPromised = require("chai-as-promised");
+chai.use(chaiAsPromised);
+
+var assert = chai.assert;
 
 describe('alioss', function() {
   var ALYOSS, mockUi, aliossClient, plugin, subject;
