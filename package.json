@@ -24,7 +24,7 @@
     "chai-as-promised": "^7.1.1",
     "express": "^4.8.5",
     "glob": "^4.0.5",
-    "mocha": "^2.0.1"
+    "mocha": "^10.2.0"
   },
   "keywords": [
     "ember-addon",
